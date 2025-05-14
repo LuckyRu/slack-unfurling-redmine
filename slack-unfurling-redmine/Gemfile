@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem 'faraday'
+gem "reverse_markdown", "~> 2.1"
 
 group :test do
   gem 'minitest'
