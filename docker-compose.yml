@@ -1,0 +1,44 @@
+services:
+  slack-unfurling-redmine:
+    build:
+    expose:
+      - "3000"
+    environment:
+      - REDMINE_API_ACCESS_KEY=your-redmine-api-key
+      - SLACK_OAUTH_ACCESS_TOKEN=your-slack-oauth-key
+      - SKIP_FIELDS=true
+      - IGNORE_CUSTOM_FIELDS=true
+      ##### Description preview options
+      # Uncomment line to enable HTML to Markdown conversion
+      # - CONVERT_HTML_TO_MARKDOWN=true
+      - MAX_PREVIEW_LINES=7
+      - MAX_CHARS=400
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  https-portal:
+    image: steveltn/https-portal:1
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      DOMAINS: 'your.domain.com -> http://slack-unfurling-redmine:3000'
+      STAGE: 'production' # Change to 'staging' for testing with self-signed certificates
+      # Optional: Configure email for Let's Encrypt notifications
+      # FORCE_RENEW: 'true' # Uncomment to force certificate renewal
+      # ERROR_PAGES_SERVER: 'your-server-domain.com' # Uncomment to enable custom error pages
+    restart: unless-stopped
+    volumes:
+      - https-portal-data:/var/lib/https-portal
+    depends_on:
+      - slack-unfurling-redmine
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  https-portal-data:
