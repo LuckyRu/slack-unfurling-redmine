@@ -1,6 +1,6 @@
 services:
   slack-unfurling-redmine:
-    build:
+    build: .
     expose:
       - "3000"
     environment:

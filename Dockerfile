@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# DEBUG: Show Bundler version from base image
-RUN echo "INFO: Using Bundler version: $(bundle --version)"
+# Copy your slack-unfurling-redmine application code into the container
+COPY ./slack-unfurling-redmine ./slack-unfurling-redmine
 
 # Create a Gemfile for the main server components
 # and install them locally into /usr/src/app/vendor/bundle

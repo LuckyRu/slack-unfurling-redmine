@@ -131,3 +131,6 @@ $RECYCLE.BIN/
 /serverless-output.yaml
 vendor/
 .bundle/
+
+# Docker
+/docker-compose.yml
