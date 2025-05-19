@@ -12,12 +12,13 @@ class RedmineClient
   DEFAULT_MAX_PREVIEW_LINES = 7
   DEFAULT_MAX_CHARS = 400
 
+  # Добавляем domain_from_slack как опциональный параметр, но не используем его
   def enabled?
     # Check if the Redmine API access key is configured in environment variables
     ENV['REDMINE_API_ACCESS_KEY']
   end
 
-  def target?(url)
+  def target?(url, domain_from_slack = nil)
     # Check if the given URL matches the Redmine issue URL pattern
     url =~ URL_PATTERN
   end

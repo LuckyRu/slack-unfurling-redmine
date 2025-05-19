@@ -5,14 +5,21 @@ services:
       - "3000"
     environment:
       - REDMINE_API_ACCESS_KEY=your-redmine-api-key
+      - OUTLINE_EXPECTED_DOMAIN=docs.yourcompany.com
+      - OUTLINE_API_TOKEN=your-outline-api-token
       - SLACK_OAUTH_ACCESS_TOKEN=your-slack-oauth-key
-      - SKIP_FIELDS=true
-      - IGNORE_CUSTOM_FIELDS=true
-      ##### Description preview options
-      # Uncomment line to enable HTML to Markdown conversion
-      # - CONVERT_HTML_TO_MARKDOWN=true
+      ##### Common preview options
       - MAX_PREVIEW_LINES=7
       - MAX_CHARS=400
+      ##### Redmine options
+      - SKIP_FIELDS=true
+      - IGNORE_CUSTOM_FIELDS=true
+      # Uncomment line to enable HTML to Markdown conversion
+      # - CONVERT_HTML_TO_MARKDOWN=true
+      ##### Outline options
+      # optional preview ovverides
+      # - OUTLINE_MAX_PREVIEW_LINES=5
+      # - OUTLINE_MAX_CHARS=300      
     restart: unless-stopped
     networks:
       - app-network
